@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Hub - Interactive Browser Games</title>
+    <meta name="description" content="Play fun interactive browser games including memory, trivia, and puzzle games. Challenge yourself and compete on the leaderboard!">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
+</head>
+<body>
+    <!-- Main Menu -->
+    <div id="main-menu" class="screen active">
+        <!-- Animated Background -->
+        <div class="bg-animation">
+            <div class="bg-circle bg-circle-1"></div>
+            <div class="bg-circle bg-circle-2"></div>
+            <div class="bg-circle bg-circle-3"></div>
+        </div>
+
+        <!-- Floating Particles -->
+        <div class="particles"></div>
+
+        <div class="container">
+            <!-- Header -->
+            <header class="header">
+                <div class="title-container">
+                    <h1 class="main-title">
+                        <span class="sparkle">✨</span>
+                        🎮 Game Hub
+                        <span class="sparkle">✨</span>
+                    </h1>
+                    <div class="title-glow"></div>
+                </div>
+                
+                <p class="subtitle">
+                    Challenge yourself with <span class="highlight">brain-bending games</span>! 
+                    Test your memory, knowledge, and problem-solving skills in our collection of 
+                    <span class="highlight-pink">interactive challenges</span>.
+                </p>
+                
+                <button class="btn btn-primary" onclick="showLeaderboard()">
+                    🏆 Hall of Fame ✨
+                </button>
+            </header>
+
+            <!-- Game Cards -->
+            <div class="games-grid">
+                <div class="game-card" onclick="startGame('memory')">
+                    <div class="card-glow memory-glow"></div>
+                    <div class="card-content">
+                        <div class="card-header">
+                            <div class="game-icon memory-icon">🧠</div>
+                            <div class="game-emoji">🧠</div>
+                        </div>
+                        <h3 class="game-title">Memory Game</h3>
+                        <p class="game-description">Test your memory by matching pairs of cards. Quick thinking earns bonus points!</p>
+                        <div class="game-meta">
+                            <span class="difficulty easy">⭐ Easy</span>
+                            <span class="players">👥 <span id="memory-players">0</span></span>
+                        </div>
+                        <button class="btn btn-game memory-btn">
+                            ▶️ Start Playing ⚡
+                        </button>
+                    </div>
+                </div>
+
+                <div class="game-card" onclick="startGame('trivia')">
+                    <div class="card-glow trivia-glow"></div>
+                    <div class="card-content">
+                        <div class="card-header">
+                            <div class="game-icon trivia-icon">🎯</div>
+                            <div class="game-emoji">🎯</div>
+                        </div>
+                        <h3 class="game-title">Trivia Quiz</h3>
+                        <p class="game-description">Answer questions across various categories. Speed and accuracy matter!</p>
+                        <div class="game-meta">
+                            <span class="difficulty medium">⭐ Medium</span>
+                            <span class="players">👥 <span id="trivia-players">0</span></span>
+                        </div>
+                        <button class="btn btn-game trivia-btn">
+                            ▶️ Start Playing ⚡
+                        </button>
+                    </div>
+                </div>
+
+                <div class="game-card" onclick="startGame('puzzle')">
+                    <div class="card-glow puzzle-glow"></div>
+                    <div class="card-content">
+                        <div class="card-header">
+                            <div class="game-icon puzzle-icon">🧩</div>
+                            <div class="game-emoji">🧩</div>
+                        </div>
+                        <h3 class="game-title">Sliding Puzzle</h3>
+                        <p class="game-description">Arrange numbered tiles in order. Solve with fewer moves for higher scores!</p>
+                        <div class="game-meta">
+                            <span class="difficulty hard">⭐ Hard</span>
+                            <span class="players">👥 <span id="puzzle-players">0</span></span>
+                        </div>
+                        <button class="btn btn-game puzzle-btn">
+                            ▶️ Start Playing ⚡
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features Section -->
+            <div class="features">
+                <h2 class="features-title">Why Choose <span class="gradient-text">Game Hub</span>?</h2>
+                <p class="features-subtitle">Experience the future of browser gaming with our cutting-edge features</p>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon brain-feature">🧠</div>
+                        <h3>Neural Enhancement</h3>
+                        <p>Advanced algorithms designed to boost cognitive performance and mental agility</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon trophy-feature">🏆</div>
+                        <h3>Global Competition</h3>
+                        <p>Compete with players worldwide and climb the ranks in real-time leaderboards</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon zap-feature">⚡</div>
+                        <h3>Instant Action</h3>
+                        <p>Zero downloads, maximum fun. Play instantly across all devices with lightning speed</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="footer-content">
+                    <span>Crafted with</span>
+                    <div class="heart">❤️</div>
+                    <span>for gamers worldwide</span>
+                    <span class="sparkle">✨</span>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Memory Game Screen -->
+    <div id="memory-game" class="screen game-screen">
+        <div class="bg-animation">
+            <div class="bg-circle bg-circle-1"></div>
+            <div class="bg-circle bg-circle-2"></div>
+            <div class="bg-circle bg-circle-3"></div>
+        </div>
+        <div class="particles"></div>
+        
+        <div class="game-header">
+            <div class="game-nav">
+                <button class="btn btn-nav" onclick="backToMenu()">← Back</button>
+                <button class="btn btn-nav" onclick="backToMenu()">🏠 Home</button>
+            </div>
+            <h1 class="game-title-header">
+                ✨ Memory Game ✨
+            </h1>
+            <div class="game-controls">
+                <div class="score-display">Score: <span id="memory-score">0</span></div>
+                <button class="btn btn-nav" onclick="showLeaderboard()">🏆 Leaderboard</button>
+            </div>
+        </div>
+
+        <div class="game-content">
+            <div id="memory-start" class="game-start">
+                <div class="start-card">
+                    <h2>Memory Card Game</h2>
+                    <p>Flip cards to find matching pairs. Complete the game with fewer moves for a higher score!</p>
+                    <button class="btn btn-primary" onclick="initMemoryGame()">Start Game</button>
+                </div>
+            </div>
+
+            <div id="memory-play" class="game-play" style="display: none;">
+                <div class="game-stats">
+                    <div class="stat">
+                        <div class="stat-value" id="memory-moves">0</div>
+                        <div class="stat-label">Moves</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" id="memory-matches">0/8</div>
+                        <div class="stat-label">Matches</div>
+                    </div>
+                </div>
+                <div id="memory-board" class="memory-board"></div>
+            </div>
+
+            <div id="memory-complete" class="game-complete" style="display: none;">
+                <div class="complete-card">
+                    <h3>Congratulations! 🎉</h3>
+                    <p>You completed the game in <span id="final-moves">0</span> moves!</p>
+                    <div class="complete-actions">
+                        <button class="btn btn-primary" onclick="initMemoryGame()">Play Again</button>
+                        <button class="btn btn-secondary" onclick="shareScore('memory')">Share Score</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Trivia Game Screen -->
+    <div id="trivia-game" class="screen game-screen">
+        <div class="bg-animation">
+            <div class="bg-circle bg-circle-1"></div>
+            <div class="bg-circle bg-circle-2"></div>
+            <div class="bg-circle bg-circle-3"></div>
+        </div>
+        <div class="particles"></div>
+        
+        <div class="game-header">
+            <div class="game-nav">
+                <button class="btn btn-nav" onclick="backToMenu()">← Back</button>
+                <button class="btn btn-nav" onclick="backToMenu()">🏠 Home</button>
+            </div>
+            <h1 class="game-title-header">
+                ✨ Trivia Quiz ✨
+            </h1>
+            <div class="game-controls">
+                <div class="score-display">Score: <span id="trivia-score">0</span></div>
+                <button class="btn btn-nav" onclick="showLeaderboard()">🏆 Leaderboard</button>
+            </div>
+        </div>
+
+        <div class="game-content">
+            <div id="trivia-start" class="game-start">
+                <div class="start-card">
+                    <h2>Trivia Quiz</h2>
+                    <p>Answer questions correctly and quickly to earn bonus points. You have 30 seconds per question!</p>
+                    <button class="btn btn-primary" onclick="initTriviaGame()">Start Quiz</button>
+                </div>
+            </div>
+
+            <div id="trivia-play" class="game-play" style="display: none;">
+                <div class="trivia-progress">
+                    <div class="progress-info">
+                        <span>Question <span id="current-question">1</span> of <span id="total-questions">8</span></span>
+                        <div class="timer">Time: <span id="time-left">30</span>s</div>
+                    </div>
+                    <div class="progress-bar">
+                        <div id="progress-fill" class="progress-fill"></div>
+                    </div>
+                </div>
+                
+                <div class="question-card">
+                    <div class="question-category" id="question-category">Category</div>
+                    <h3 class="question-text" id="question-text">Question will appear here</h3>
+                    <div id="answer-options" class="answer-options"></div>
+                </div>
+                
+                <div id="answer-feedback" class="answer-feedback" style="display: none;"></div>
+            </div>
+
+            <div id="trivia-complete" class="game-complete" style="display: none;">
+                <div class="complete-card">
+                    <h3>Quiz Complete! 🎉</h3>
+                    <div class="final-score" id="trivia-final-score">0 Points</div>
+                    <p>You answered <span id="correct-answers">0</span> questions correctly!</p>
+                    <div class="complete-actions">
+                        <button class="btn btn-primary" onclick="initTriviaGame()">Play Again</button>
+                        <button class="btn btn-secondary" onclick="shareScore('trivia')">Share Score</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Puzzle Game Screen -->
+    <div id="puzzle-game" class="screen game-screen">
+        <div class="bg-animation">
+            <div class="bg-circle bg-circle-1"></div>
+            <div class="bg-circle bg-circle-2"></div>
+            <div class="bg-circle bg-circle-3"></div>
+        </div>
+        <div class="particles"></div>
+        
+        <div class="game-header">
+            <div class="game-nav">
+                <button class="btn btn-nav" onclick="backToMenu()">← Back</button>
+                <button class="btn btn-nav" onclick="backToMenu()">🏠 Home</button>
+            </div>
+            <h1 class="game-title-header">
+                ✨ Sliding Puzzle ✨
+            </h1>
+            <div class="game-controls">
+                <div class="score-display">Moves: <span id="puzzle-moves">0</span></div>
+                <button class="btn btn-nav" onclick="showLeaderboard()">🏆 Leaderboard</button>
+            </div>
+        </div>
+
+        <div class="game-content">
+            <div id="puzzle-start" class="game-start">
+                <div class="start-card">
+                    <h2>Sliding Puzzle</h2>
+                    <p>Arrange the numbers 1-8 in order by sliding tiles into the empty space. Solve it quickly with fewer moves for a higher score!</p>
+                    <button class="btn btn-primary" onclick="initPuzzleGame()">Start Puzzle</button>
+                </div>
+            </div>
+
+            <div id="puzzle-play" class="game-play" style="display: none;">
+                <div class="game-stats">
+                    <div class="stat">
+                        <div class="stat-value" id="puzzle-moves-display">0</div>
+                        <div class="stat-label">Moves</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" id="puzzle-time">0s</div>
+                        <div class="stat-label">Time</div>
+                    </div>
+                </div>
+                <div id="puzzle-board" class="puzzle-board"></div>
+            </div>
+
+            <div id="puzzle-complete" class="game-complete" style="display: none;">
+                <div class="complete-card">
+                    <h3>Puzzle Solved! 🎉</h3>
+                    <p>You completed the puzzle in <span id="puzzle-final-moves">0</span> moves!</p>
+                    <div class="complete-actions">
+                        <button class="btn btn-primary" onclick="initPuzzleGame()">Play Again</button>
+                        <button class="btn btn-secondary" onclick="shareScore('puzzle')">Share Score</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leaderboard Modal -->
+    <div id="leaderboard-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🏆 Hall of Fame ⭐</h2>
+                <button class="modal-close" onclick="hideLeaderboard()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="leaderboard-filters">
+                    <button class="filter-btn active" onclick="filterLeaderboard('all')">⚡ All Games</button>
+                    <button class="filter-btn" onclick="filterLeaderboard('memory')">🧠 Memory</button>
+                    <button class="filter-btn" onclick="filterLeaderboard('trivia')">🎯 Trivia</button>
+                    <button class="filter-btn" onclick="filterLeaderboard('puzzle')">🧩 Puzzle</button>
+                </div>
+                <div id="leaderboard-list" class="leaderboard-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Score Save Modal -->
+    <div id="score-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Great Job! Save Your Score</h2>
+            </div>
+            <div class="modal-body">
+                <div class="score-display-large">
+                    <span id="modal-score">0</span> Points!
+                </div>
+                <p>Enter your name to save this score</p>
+                <input type="text" id="player-name" placeholder="Your name" maxlength="20">
+                <div class="modal-actions">
+                    <button class="btn btn-primary" onclick="savePlayerScore()">Save Score</button>
+                    <button class="btn btn-secondary" onclick="hideScoreModal()">Skip</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
